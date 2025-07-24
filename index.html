@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Alkhatib - CEO & Founder</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3E5046;
+            --secondary-color: #5D7A6B;
+            --light-color: #F5F7F6;
+            --dark-color: #2A3A32;
+            --accent-color: #8BA697;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Splash Screen */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease-out;
+        }
+        
+        #splash-screen img {
+            width: 300px;
+            height: 300px;
+            object-fit: contain;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.95); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(0.95); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Top with Logo and Language Toggle - MODIFIED */
+        .header-top {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-sizing: border-box;
+            z-index: 100;
+        }
+        
+        .header-logo {
+            height: 70px; /* Increased size */
+            width: auto;
+        }
+        
+        .language-btn {
+            background-color: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .language-btn:hover {
+            background-color: rgba(255,255,255,0.3);
+        }
+        
+        html[dir="rtl"] .header-top {
+            flex-direction: row-reverse; /* Maintain RTL behavior */
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4rem 0;
+            position: relative;
+            text-align: center;
+        }
+        
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .profile-image {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid var(--accent-color);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+        }
+        
+        h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            color: white;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        
+        .title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .title-description {
+            font-size: 1.2rem;
+            color: white;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+        }
+        
+        /* Contact Widget Section */
+        .contact-widget {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 3rem auto;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .contact-widget h2 {
+            color: var(--primary-color);
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .contact-widget h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 25%;
+            transition: width 0.3s ease;
+        }
+        
+        .contact-widget h2:hover::after {
+            width: 60%;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1.25rem;
+            background-color: var(--light-color);
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            gap: 1.5rem;
+        }
+        
+        .contact-method:hover {
+            transform: translateY(-5px);
+            background-color: #e8f0ee;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-icon {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        
+        .contact-method:hover .contact-icon {
+            transform: scale(1.05);
+            background-color: var(--primary-color);
+        }
+        
+        .contact-details {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .contact-details h3 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .contact-info-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .phone-link {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .phone-link:hover {
+            color: var(--accent-color);
+        }
+        
+        .separator {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .whatsapp-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: opacity 0.3s;
+        }
+        
+        .whatsapp-link:hover {
+            opacity: 0.8;
+        }
+        
+        .email-link {
+            color: var(--dark-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .email-link:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Quick Links Section */
+        .quick-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .quick-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 120px;
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: transform 0.3s;
+        }
+        
+        .quick-link:hover {
+            transform: translateY(-5px);
+        }
+        
+        .link-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.8rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .link-label {
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* Add to Contact Section */
+        .add-to-contact {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem auto 4rem;
+            max-width: 600px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .add-to-contact h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-share-options {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .share-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .share-option:hover {
+            transform: translateY(-5px);
+        }
+        
+        .share-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.8rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .qr-code-container {
+            margin: 1.5rem auto;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            max-width: 200px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .qr-code-container img {
+            width: 100%;
+            height: auto;
+            border: 1px solid #eee;
+        }
+        
+        .qr-label {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--dark-color);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 1.2rem;
+        }
+        
+        /* RTL Styles for Arabic */
+        html[dir="rtl"] body {
+            font-family: 'Arial', sans-serif;
+            text-align: right;
+        }
+        
+        html[dir="rtl"] .contact-details {
+            text-align: right;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            .title {
+                font-size: 2.2rem;
+            }
+            
+            .title-description {
+                font-size: 1rem;
+                padding: 0 15px;
+            }
+            
+            .contact-widget, .add-to-contact {
+                padding: 1.5rem;
+                margin: 2rem auto;
+            }
+            
+            .contact-method {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .contact-icon {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            html[dir="rtl"] .contact-method {
+                text-align: center;
+            }
+            
+            .quick-links, .contact-share-options {
+                gap: 1rem;
+            }
+            
+            .quick-link, .share-option {
+                width: 100px;
+            }
+            
+            .profile-image {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .header-logo {
+                height: 50px; /* Slightly smaller on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen">
+        <img src="splash.png" alt="ConnectWebia Logo">
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" style="display: none;">
+        <!-- Modified Logo and Language Toggle -->
+        <div class="header-top">
+            <img src="splash.png" alt="ConnectWebia Logo" class="header-logo">
+            <button class="language-btn" onclick="toggleLanguage()">EN/AR</button>
+        </div>
+        
+        <header>
+            <div class="container header-content">
+                <img src="profile.jpg" alt="Mohammad Alkhatib" class="profile-image">
+                
+                <h1 data-en="MOHAMMAD ALKHATIB" data-ar="محمد الخطيب">MOHAMMAD ALKHATIB</h1>
+                <div class="title" data-en="CEO & FOUNDER" data-ar="المدير التنفيذي والمؤسس">CEO & FOUNDER</div>
+                <div class="title-description" data-en="Digital innovator and technology leader specializing in web solutions and business growth strategies" 
+                     data-ar="مبتكر رقمي وقائد تكنولوجي متخصص في حلول الويب واستراتيجيات نمو الأعمال">
+                </div>
+            </div>
+        </header>
+        
+        <!-- Contact Widget Section -->
+        <section class="contact-widget">
+            <div class="container">
+                <h2 data-en="Contact Us" data-ar="اتصل بنا">Contact Us</h2>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3 data-en="Mobile" data-ar="موبايل">Mobile</h3>
+                        <div class="contact-info-row">
+                            <a href="tel:+962797988118" class="phone-link">+962 7 9798 8118</a>
+                            <span class="separator">|</span>
+                            <a href="https://wa.me/962797988118" target="_blank" class="whatsapp-link">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-method">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3 data-en="Email" data-ar="البريد الإلكتروني">Email</h3>
+                        <a href="mailto:info@mohalkhatib.com" class="email-link">info@mohalkhatib.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Quick Links Section -->
+        <div class="container">
+            <div class="quick-links">
+                <a href="https://connectwebia.com" class="quick-link" target="_blank">
+                    <div class="link-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="link-label" data-en="Website" data-ar="الموقع الإلكتروني">Website</div>
+                </a>
+                
+                <a href="Company profile (Connect Webia).pdf" class="quick-link" target="_blank">
+                    <div class="link-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="link-label" data-en="Company Profile" data-ar="الملف التعريفي للشركة">Company Profile</div>
+                </a>
+                
+                <a href="https://www.linkedin.com/in/mohmmad-khatib-2b7b752a7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="quick-link" target="_blank">
+                    <div class="link-icon">
+                        <i class="fab fa-linkedin-in"></i>
+                    </div>
+                    <div class="link-label" data-en="LinkedIn" data-ar="لينكد إن">LinkedIn</div>
+                </a>
+                
+                <a href="https://www.instagram.com/mohmmadkhatib14?igsh=NHNwODk5MDB4YXNh&utm_source=qr" class="quick-link" target="_blank">
+                    <div class="link-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="link-label" data-en="Instagram" data-ar="إنستغرام">Instagram</div>
+                </a>
+            </div>
+        </div>        
+        <!-- Add to Contact Section -->
+        <section class="add-to-contact">
+            <div class="container">
+                <h2 data-en="Add to Contacts" data-ar="أضف إلى جهات الاتصال">Add to Contacts</h2>
+                
+                <div class="contact-share-options">
+                    <!-- QR Code -->
+                    <div class="share-option" onclick="showQRCode()">
+                        <div class="share-icon">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <span data-en="Show QR Code" data-ar="عرض رمز الاستجابة السريعة">Show QR Code</span>
+                    </div>
+                    
+                    <!-- Share Link -->
+                    <div class="share-option" onclick="shareContact()">
+                        <div class="share-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <span data-en="Share Contact" data-ar="مشاركة جهة الاتصال">Share Contact</span>
+                    </div>
+                </div>
+                
+                <!-- QR Code Container (hidden by default) -->
+                <div id="qrCodeContainer" class="qr-code-container" style="display: none;">
+                    <img src="QR.jpg" alt="Contact QR Code">
+                    <div class="qr-label" data-en="Scan to save contact" data-ar="امسح لحفظ جهة الاتصال">Scan to save contact</div>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <div class="container">
+                <p data-en="&copy; 2024 ConnectWebia. All Rights Reserved." data-ar="&copy; 2024 كونكت ويبيا. جميع الحقوق محفوظة.">
+                    &copy; 2024 ConnectWebia. All Rights Reserved.
+                </p>
+                <p>connectwebia.com</p>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        // Splash screen with 1.5 second display
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var splashScreen = document.getElementById('splash-screen');
+                var mainContent = document.getElementById('main-content');
+                
+                splashScreen.style.opacity = '0';
+                mainContent.style.display = 'block';
+                
+                setTimeout(function() {
+                    splashScreen.style.display = 'none';
+                }, 800);
+            }, 1500);
+        });
+        
+        // QR Code Functionality
+        function showQRCode() {
+            const qrContainer = document.getElementById('qrCodeContainer');
+            qrContainer.style.display = qrContainer.style.display === 'none' ? 'block' : 'none';
+        }
+        
+        // Share Contact Functionality
+        function shareContact() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Mohammad Alkhatib - CEO & Founder',
+                    text: 'Connect with Mohammad Alkhatib, CEO & Founder of ConnectWebia',
+                    url: window.location.href
+                })
+                .catch(error => console.log('Error sharing:', error));
+            } else {
+                // Fallback for desktop
+                alert('Share this URL: ' + window.location.href);
+            }
+        }
+        
+        // Language Toggle Functionality
+        function toggleLanguage() {
+            const html = document.documentElement;
+            const currentLang = html.getAttribute('lang');
+            const newLang = currentLang === 'en' ? 'ar' : 'en';
+            const newDir = newLang === 'ar' ? 'rtl' : 'ltr';
+            
+            // Update HTML attributes
+            html.setAttribute('lang', newLang);
+            html.setAttribute('dir', newDir);
+            
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-en], [data-ar]').forEach(element => {
+                if (element.hasAttribute(`data-${newLang}`)) {
+                    const newText = element.getAttribute(`data-${newLang}`);
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.value = newText;
+                    } else {
+                        element.textContent = newText;
+                    }
+                }
+            });
+            
+            // Update button text
+            document.querySelector('.language-btn').textContent = newLang === 'en' ? 'EN/AR' : 'AR/EN';
+        }
+    </script>
+</body>
+</html>
